@@ -1,0 +1,91 @@
+.civibbg-groups-map td,
+.civibbg-admin-table td,
+.civibbg-roles-hierarchy td {
+    vertical-align: top;
+}
+
+.civibbg-groups-map th,
+.civibbg-groups-map td,
+.civibbg-roles-hierarchy th,
+.civibbg-roles-hierarchy td,
+.civibbg-admin-table th,
+.civibbg-admin-table td {
+    padding-left: 10px;
+}
+
+.civibbg-groups-map th:last-child,
+.civibbg-groups-map td:last-child,
+.civibbg-roles-hierarchy th:last-child,
+.civibbg-roles-hierarchy td:last-child {
+    text-align: right;
+}
+
+.civibbg-groups-map td button {
+    margin-left: 5px !important;
+}
+
+.civibbg_error {
+    color: darkred !important;
+    font-weight: bold;
+}
+
+#civicrm-bbpress-groups-page form input[type='text'],
+#civicrm-bbpress-groups-page form input[type='url'],
+#civicrm-bbpress-groups-page form input[type='email'] {
+    width: 100%;
+    max-width: 600px;
+}
+
+.civibbg_hideSm {
+    display: none;
+}
+
+.civibbg-admin-table code {
+    background: #fff;
+    color: #3F51B5;
+    padding: 0;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 782px){
+    .civibbg-groups-map th,
+    .civibbg-roles-hierarchy th,
+    .civibbg-admin-table th {
+        display: none;
+    }
+    
+    .civibbg-admin-table tr {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #bbb;
+    }
+    
+    .civibbg-groups-map th:last-child,
+    .civibbg-roles-hierarchy th:last-child {
+        display: block;
+    }
+    
+    label.civibbg_hideSm {
+        display: block;
+        font-weight: bold;
+        margin-top: 5px;
+    }
+}
+
+#civibbg-results pre,
+#civibbg-errors pre {
+    white-space: pre-wrap;
+}
+
+#civibbg-results pre,
+#civibbg-errors pre,
+#civibbg-messages p,
+#civibbg-errors p {
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.civibbg-extra-meta label {
+    display: block;
+}

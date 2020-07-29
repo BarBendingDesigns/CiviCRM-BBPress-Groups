@@ -1,0 +1,13 @@
+#bbpress-forums .bbp-forums-list .bbp-forum {
+    display: block;
+    margin: 5px 0;
+}
+
+#bbpress-forums .bbp-forums-list .bbp-forum.css-sep:not(:last-child)::after {
+    content: "";
+}
+
+#bbpress-forums .alert {
+    overflow: auto;
+    width: 100%;
+}

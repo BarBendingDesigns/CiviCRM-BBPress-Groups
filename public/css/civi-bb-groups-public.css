@@ -1,0 +1,21 @@
+#civibbg-login-form input[type=text], 
+#civibbg-login-form input[type=password] {
+    display: block;
+}
+
+.civibbg-links {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.civibbg-links a {
+    margin-right: 5px;
+}
+
+#bbp-user-navigation .civibbg-links {
+    padding-top: 10px;
+}
+
+#civibbg-account-form #civibbg-account-result div {
+    margin-top: 10px;
+}
