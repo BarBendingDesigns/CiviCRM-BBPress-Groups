@@ -111,6 +111,7 @@ class Civi_Bb_Groups {
         //$this->loader->add_action( 'the_post', $plugin_public, 'maybe_process_profile_shortcode');
         $this->loader->add_action( 'the_post', $plugin_public, 'maybe_enqueue_account_script' );
         $this->loader->add_filter( 'the_content', $plugin_public, 'maybe_add_user_links');
+        $this->loader->add_action( 'template_redirect', $plugin_public, 'register_user_account_script_and_localize_result', 8 );
         
         $this->loader->add_filter( 'bbp_user_can_view_forum', $bb_public, 'civi_bbg_user_can_view_forum', 10, 3 );
         $this->loader->add_action( 'bbp_register_theme_packages', $bb_public, 'register_plugin_template' );
@@ -123,6 +124,7 @@ class Civi_Bb_Groups {
         $this->loader->add_filter( 'bbp_kses_allowed_tags', $bb_public, 'maybe_retrict_kses_allowed_tags');
         $this->loader->add_filter( 'bbp_make_clickable', $bb_public, 'maybe_dont_make_things_clickable', 10, 2);
         $this->loader->add_filter( 'bbp_get_forum_freshness_link', $bb_public, 'maybe_modify_freshness_link', 10, 6);
+        $this->loader->add_filter( 'bbp_get_topic_freshness_link', $bb_public, 'maybe_modify_topic_freshness_link', 10, 5);
         $this->loader->add_filter( 'bbp_forum_subscription_user_ids', $bb_public, 'maybe_modify_forum_subscibers', 10, 3);
         $this->loader->add_filter( 'bbp_topic_subscription_user_ids', $bb_public, 'maybe_modify_topic_subscribers', 10, 3);
         

@@ -10,12 +10,16 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
+$topic_id = bbp_get_topic_id();
+$forum_id = bbp_get_topic_forum_id($topic_id);
+$can_view = bbp_user_can_view_forum(array( 'forum_id' => $forum_id ));
+
 ?>
 
 <ul id="bbp-topic-<?php bbp_topic_id(); ?>" <?php bbp_topic_class(); ?>>
 	<li class="bbp-topic-title">
 
-		<?php if ( bbp_is_user_home() ) : ?>
+		<?php if ( bbp_is_user_home() && $can_view ) : ?>
 
 			<?php if ( bbp_is_favorites() ) : ?>
 
@@ -47,11 +51,18 @@ defined( 'ABSPATH' ) || exit;
 
 		<?php do_action( 'bbp_theme_before_topic_title' ); ?>
 
+		<?php if($can_view): ?>
 		<a class="bbp-topic-permalink" href="<?php bbp_topic_permalink(); ?>"><?php bbp_topic_title(); ?></a>
-
+		
 		<?php do_action( 'bbp_theme_after_topic_title' ); ?>
 
 		<?php bbp_topic_pagination(); ?>
+		
+		<?php else: ?>
+		Topic in private forum
+		
+		<?php do_action( 'bbp_theme_after_topic_title' ); ?>
+		<?php endif; ?>
 
 		<?php do_action( 'bbp_theme_before_topic_meta' ); ?>
 
@@ -67,7 +78,13 @@ defined( 'ABSPATH' ) || exit;
 
 				<?php do_action( 'bbp_theme_before_topic_started_in' ); ?>
 
-				<span class="bbp-topic-started-in"><?php printf( esc_html__( 'in: %1$s', 'bbpress' ), '<a href="' . bbp_get_forum_permalink( bbp_get_topic_forum_id() ) . '">' . bbp_get_forum_title( bbp_get_topic_forum_id() ) . '</a>' ); ?></span>
+				<span class="bbp-topic-started-in"><?php
+				    if($can_view):
+				        printf( esc_html__( 'in: %1$s', 'bbpress' ), '<a href="' . bbp_get_forum_permalink( bbp_get_topic_forum_id() ) . '">' . bbp_get_forum_title( bbp_get_topic_forum_id() ) . '</a>' ); 
+				    else:
+				        printf( esc_html__( 'in: %1$s', 'bbpress' ), bbp_get_forum_title( bbp_get_topic_forum_id() )); 
+				    endif;
+				?></span>
 				<?php do_action( 'bbp_theme_after_topic_started_in' ); ?>
 
 			<?php endif; ?>

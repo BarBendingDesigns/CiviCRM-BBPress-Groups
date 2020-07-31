@@ -128,9 +128,9 @@ class Civi_Bb_Groups_Sync {
 	public function sync_groups(){
 
 	    $results = array(
-	        'errors' => [],
 	        'messages' => [],
 	        'processed_users' => [],
+	        'errors' => [],
 	    );
 	    
 	    try{

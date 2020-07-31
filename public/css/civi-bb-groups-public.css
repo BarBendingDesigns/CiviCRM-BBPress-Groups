@@ -19,3 +19,7 @@
 #civibbg-account-form #civibbg-account-result div {
     margin-top: 10px;
 }
+
+#civibbg-account-form {
+    padding-bottom: 20px;
+}

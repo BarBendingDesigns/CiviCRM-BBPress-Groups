@@ -39,33 +39,56 @@ class Civi_Bb_Groups_Public {
 	    add_shortcode('civi-bbg-user-account', [$this, 'user_account']);
 	}
 	
-	// Enqueue and localize the script for the [civi-bbg-user-account] shortcode
-	public function enqueue_user_account_script_and_localize_result(){
-	    wp_enqueue_script( 'civibbg_account_shortcode', CIVI_BB_GROUPS_URL . 'public/js/civi-bb-groups-account-shortcode.js', array( 'jquery' ), $this->version, false );
+	// Register and localize the script for the [civi-bbg-user-account] shortcode,
+	// And handle user account update if requested
+	public function register_user_account_script_and_localize_result(){
+	    wp_register_script( 'civibbg_account_shortcode', CIVI_BB_GROUPS_URL . 'public/js/civi-bb-groups-account-shortcode.js', array( 'jquery' ), $this->version, false );
 	    
-	    if(isset($_POST['civibbg'])){
+	    if(isset($_GET['civibbg_updated'])){
+	        $result = array(
+    	        'submitted' => true,
+    	        'success' => true,
+    	        'message' => 'Account details saved',
+    	    );
+    	    
+	    } elseif(isset($_POST['civibbg'])){
             $data = $this->frontend_update_user_account();
-            $result = array(
-                'submitted' => true,
-                'success' => $data[0],
-                'message' => $data[1],
-            );
+            
+            // We need to redirect if the password has been updated, so that nonces will be generated correctly
+            if(!empty($data[0]) && !empty($data[2])){
+                $args = array( 'civibbg_updated' => 'true' );
+        		$current_url = $this->get_current_url();
+        		$redirect = add_query_arg( $args, $current_url );
+                wp_safe_redirect( $redirect, 302 );
+                
+            } else {
+                $result = array(
+                    'submitted' => true,
+                    'success' => $data[0],
+                    'message' => $data[1],
+                    
+                );
+            }
 	    } else {
 	        $result = array(
     	        'submitted' => false,
-    	        'error' => false,
-    	        'message' => ''
+    	        'success' => false,
+    	        'message' => '',
     	    );
 	    }
 	    wp_localize_script( 'civibbg_account_shortcode', 'civibbg_account_result', $result );
 	    
 	}
 	
+	// Enqueue the script for the [civi-bbg-user-account] shortcode
+	public function enqueue_user_account_script(){
+	    wp_enqueue_script( 'civibbg_account_shortcode' );
+	}
+	
 	// If post content contains the [civi-bbg-user-account] shortcode, enqueue the required script
 	public function maybe_enqueue_account_script($p){
 	    if(has_shortcode($p->post_content, 'civi-bbg-user-account')){
-	        add_action( 'wp_enqueue_scripts', [$this, 'enqueue_user_account_script_and_localize_result'] );
-
+            add_action( 'wp_enqueue_scripts', [$this, 'enqueue_user_account_script'] );
 	    }
 	}
 	
@@ -102,9 +125,9 @@ class Civi_Bb_Groups_Public {
 	
 	// Handle a user account update request, from the [civi-bbg-user-account] shortcode form
 	public function frontend_update_user_account(){
-
+	    
 	    if(!isset($_POST['civibbg_user_account_nonce_field']) || !wp_verify_nonce($_POST['civibbg_user_account_nonce_field'], 'civibbg_user_account_action')){
-	        return [false, 'Security verification failed'];
+	        return [false, 'Security verification failed', false];
 	    }
 	    
 	    $user_data = [];
@@ -119,29 +142,31 @@ class Civi_Bb_Groups_Public {
         foreach($fields as $k=>$t){
             $f = isset($data[$k]) ? civibbg_sanitize_thing($data[$k], $t) : false;
             if(empty($f)){
-                return [false, 'Required field is invalid or empty'];
+                return [false, 'Required field is invalid or empty', false];
             } else {
                 $user_data[$k] = $f;
             }
         }
 
 	    if(empty($user_data['ID']) || !current_user_can('edit_user', $data['ID'])){
-	        return [false, "Sorry, you're not permitted to update this user account"];
+	        return [false, "Sorry, you're not permitted to update this user account", false];
 	    } else {
 	        $u = get_user_by( 'ID', $user_data['ID'] );
-	        if(empty($u)) return [false, "You seem to be trying to update a user who doesn't exist"];
+	        if(empty($u)) return [false, "You seem to be trying to update a user who doesn't exist", false];
 	    }
 	    
 	    $e = email_exists($user_data['user_email']);
-	    if($e && $e !== $u->ID) return [false, 'Email "'.$user_data['user_email'].'" is already in use by another user'];
+	    if($e && $e !== $u->ID) return [false, 'Email "'.$user_data['user_email'].'" is already in use by another user', false];
 	    
+	    $password_change = false;
 	    if(!empty($data['new_password'])){
 	        if(empty($data['old_password']) || !wp_check_password( $data['old_password'], $u->data->user_pass, $u->ID )){
-	            return [false, "Old password is incorrect"];
+	            return [false, "Old password is incorrect", false];
 	        } elseif(false !== strpos( wp_unslash( $data['new_password'] ), '\\' ) ){
-	            return [false, 'Passwords may not contain the character "\\"'];
+	            return [false, 'Passwords may not contain the character "\\"', false];
 	        } else {
 	            $user_data['user_pass'] = $data['new_password'];
+	            $password_change = true;
 	        }
 
 	    }
@@ -151,7 +176,7 @@ class Civi_Bb_Groups_Public {
 	    do_action('civibbg_add_civi_filters');
 	    
 	    if(is_wp_error($updated)){
-	        return [false, "Failed to update user details"];
+	        return [false, "Failed to update user details", false];
 	    } else {
 	        $success = true;
 	        $message = "Account details saved";
@@ -197,7 +222,7 @@ class Civi_Bb_Groups_Public {
 	            
 	        }
 	        
-	        return [$success, $message];
+	        return [$success, $message, $password_change];
 	    }
 
 	}
@@ -246,7 +271,7 @@ class Civi_Bb_Groups_Public {
             'confirm_password' => 'Confirm new password',
         );
         
-        $form = "<form id='civibbg-account-form' method='post' ><div id='civibbg-account-result'></div>";
+        $form = "<form id='civibbg-account-form' method='post' action='".esc_url($this->get_current_url())."' ><div id='civibbg-account-result'></div>";
         
         foreach($form_fields as $k=>$field){
             $extra = $field['readonly'] ? "readonly" : "name='civibbg[$k]' required";

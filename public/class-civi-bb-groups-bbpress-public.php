@@ -163,7 +163,7 @@ class Civi_Bb_Groups_BBPress_Public {
 	    return strip_tags($ret, $allowed);
 	}
 	
-	// Override BBPress's freshness link: Don't return a link if the user isn't allowed to access the link
+	// Override BBPress's forum freshness link: Don't return a link if the user isn't allowed to access the link
 	public function maybe_modify_freshness_link($anchor, $forum_id, $time_since, $link_url, $title, $active_id ){
 
 	    $user_id = get_current_user_id();
@@ -177,6 +177,23 @@ class Civi_Bb_Groups_BBPress_Public {
 			$anchor = esc_html__( 'No Topics', 'bbpress' );
 		}
 		return $anchor;
+	}
+	
+	// Override BBPress's topic freshness link: Don't return a link if the user isn't allowed to access the link
+	public function maybe_modify_topic_freshness_link($anchor, $topic_id, $time_since, $link_url, $title){
+	    $user_id = get_current_user_id();
+	    $forum_id = bbp_get_topic_forum_id( $topic_id );
+	    $can_view = $this->civi_bbg_user_can_view_forum(true, $forum_id, $user_id);
+	    
+	    if($can_view) return $anchor;
+	    
+	    if ( ! empty( $time_since ) ) {
+			$anchor = esc_html( $time_since );
+		} else {
+			$anchor = esc_html__( 'No Replies', 'bbpress' );
+		}
+		return $anchor;
+	    
 	}
 	
     // Exclude users from a forum's subscribers, if they're no longer allowed to view the forum

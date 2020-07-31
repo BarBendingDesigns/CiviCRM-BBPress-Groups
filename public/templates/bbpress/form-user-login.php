@@ -31,8 +31,6 @@ defined( 'ABSPATH' ) || exit;
 			<label for="rememberme"><?php esc_html_e( 'Keep me signed in', 'bbpress' ); ?></label>
 		</div>
 
-		<?php do_action( 'login_form' ); ?>
-
 		<div class="bbp-submit-wrapper">
 
 			<button type="submit" name="user-submit" id="user-submit" class="button submit user-submit"><?php esc_html_e( 'Log In', 'bbpress' ); ?></button>
