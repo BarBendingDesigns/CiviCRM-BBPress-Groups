@@ -19,20 +19,20 @@ if ( bbp_current_user_can_access_anonymous_user_form() ) : ?>
 
 		<?php do_action( 'bbp_theme_anonymous_form_extras_top' ); ?>
 
-		<p>
+		<div class="form-group">
 			<label for="bbp_anonymous_author"><?php esc_html_e( 'Name (required):', 'bbpress' ); ?></label><br />
-			<input type="text" id="bbp_anonymous_author"  value="<?php bbp_author_display_name(); ?>" size="40" maxlength="100" name="bbp_anonymous_name" autocomplete="off" />
-		</p>
+			<input class="form-control" type="text" id="bbp_anonymous_author"  value="<?php bbp_author_display_name(); ?>" size="40" maxlength="100" name="bbp_anonymous_name" autocomplete="off" />
+		</div>
 
-		<p>
+		<div class="form-group">
 			<label for="bbp_anonymous_email"><?php esc_html_e( 'Mail (will not be published) (required):', 'bbpress' ); ?></label><br />
-			<input type="text" id="bbp_anonymous_email"   value="<?php bbp_author_email(); ?>" size="40" maxlength="100" name="bbp_anonymous_email" />
-		</p>
+			<input class="form-control" type="text" id="bbp_anonymous_email"   value="<?php bbp_author_email(); ?>" size="40" maxlength="100" name="bbp_anonymous_email" />
+		</div>
 
-		<p>
+		<div class="form-group">
 			<label for="bbp_anonymous_website"><?php esc_html_e( 'Website:', 'bbpress' ); ?></label><br />
-			<input type="text" id="bbp_anonymous_website" value="<?php bbp_author_url(); ?>" size="40" maxlength="200" name="bbp_anonymous_website" />
-		</p>
+			<input class="form-control" type="text" id="bbp_anonymous_website" value="<?php bbp_author_url(); ?>" size="40" maxlength="200" name="bbp_anonymous_website" />
+		</div>
 
 		<?php do_action( 'bbp_theme_anonymous_form_extras_bottom' ); ?>
 

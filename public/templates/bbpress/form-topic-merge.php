@@ -55,7 +55,8 @@ defined( 'ABSPATH' ) || exit;
 											'post_status' => bbp_get_public_topic_statuses(),
 											'selected'    => -1,
 											'exclude'     => bbp_get_topic_id(),
-											'select_id'   => 'bbp_destination_topic'
+											'select_id'   => 'bbp_destination_topic',
+											'select_class' => 'form-control'
 										) );
 									?>
 
@@ -100,7 +101,7 @@ defined( 'ABSPATH' ) || exit;
 						</div>
 
 						<div class="bbp-submit-wrapper">
-							<button type="submit" id="bbp_merge_topic_submit" name="bbp_merge_topic_submit" class="button submit"><?php esc_html_e( 'Submit', 'bbpress' ); ?></button>
+							<button type="submit" id="bbp_merge_topic_submit" name="bbp_merge_topic_submit" class="button submit btn btn-primary"><?php esc_html_e( 'Submit', 'bbpress' ); ?></button>
 						</div>
 					</div>
 

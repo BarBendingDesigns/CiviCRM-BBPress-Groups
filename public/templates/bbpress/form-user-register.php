@@ -25,21 +25,21 @@ defined( 'ABSPATH' ) || exit;
 			</ul>
 		</div>
 
-		<div class="bbp-username">
+		<div class="bbp-username form-group">
 			<label for="user_login"><?php esc_html_e( 'Username', 'bbpress' ); ?>: </label>
-			<input type="text" name="user_login" value="<?php bbp_sanitize_val( 'user_login' ); ?>" size="20" id="user_login" maxlength="100" autocomplete="off" />
+			<input class="form-control" type="text" name="user_login" value="<?php bbp_sanitize_val( 'user_login' ); ?>" size="20" id="user_login" maxlength="100" autocomplete="off" />
 		</div>
 
-		<div class="bbp-email">
+		<div class="bbp-email form-group">
 			<label for="user_email"><?php esc_html_e( 'Email', 'bbpress' ); ?>: </label>
-			<input type="text" name="user_email" value="<?php bbp_sanitize_val( 'user_email' ); ?>" size="20" id="user_email" maxlength="100" autocomplete="off" />
+			<input class="form-control" type="text" name="user_email" value="<?php bbp_sanitize_val( 'user_email' ); ?>" size="20" id="user_email" maxlength="100" autocomplete="off" />
 		</div>
 
 		<?php do_action( 'register_form' ); ?>
 
 		<div class="bbp-submit-wrapper">
 
-			<button type="submit" name="user-submit" class="button submit user-submit"><?php esc_html_e( 'Register', 'bbpress' ); ?></button>
+			<button type="submit" name="user-submit" class="button submit user-submit btn btn-primary"><?php esc_html_e( 'Register', 'bbpress' ); ?></button>
 
 			<?php bbp_user_register_fields(); ?>
 

@@ -36,23 +36,23 @@ if ( current_user_can( 'edit_topic_tags' ) ) : ?>
 
 				<form id="rename_tag" name="rename_tag" method="post">
 
-					<div>
+					<div class="form-group">
 						<label for="tag-name"><?php esc_html_e( 'Name:', 'bbpress' ); ?></label>
-						<input type="text" id="tag-name" name="tag-name" size="20" maxlength="40" value="<?php echo esc_attr( bbp_get_topic_tag_name() ); ?>" />
+						<input class="form-control" type="text" id="tag-name" name="tag-name" size="20" maxlength="40" value="<?php echo esc_attr( bbp_get_topic_tag_name() ); ?>" />
 					</div>
 
-					<div>
+					<div class="form-group">
 						<label for="tag-slug"><?php esc_html_e( 'Slug:', 'bbpress' ); ?></label>
-						<input type="text" id="tag-slug" name="tag-slug" size="20" maxlength="40" value="<?php echo esc_attr( apply_filters( 'editable_slug', bbp_get_topic_tag_slug() ) ); ?>" />
+						<input class="form-control"  type="text" id="tag-slug" name="tag-slug" size="20" maxlength="40" value="<?php echo esc_attr( apply_filters( 'editable_slug', bbp_get_topic_tag_slug() ) ); ?>" />
 					</div>
 
-					<div>
+					<div class="form-group">
 						<label for="tag-description"><?php esc_html_e( 'Description:', 'bbpress' ); ?></label>
-						<input type="text" id="tag-description" name="tag-description" size="20" value="<?php echo esc_attr( bbp_get_topic_tag_description( array( 'before' => '', 'after' => '' ) ) ); ?>" />
+						<input class="form-control"  type="text" id="tag-description" name="tag-description" size="20" value="<?php echo esc_attr( bbp_get_topic_tag_description( array( 'before' => '', 'after' => '' ) ) ); ?>" />
 					</div>
 
 					<div class="bbp-submit-wrapper">
-						<button type="submit" class="button submit"><?php esc_attr_e( 'Update', 'bbpress' ); ?></button>
+						<button type="submit" class="button submit btn btn-primary"><?php esc_attr_e( 'Update', 'bbpress' ); ?></button>
 
 						<input type="hidden" name="tag-id" value="<?php bbp_topic_tag_id(); ?>" />
 						<input type="hidden" name="action" value="bbp-update-topic-tag" />
@@ -76,13 +76,13 @@ if ( current_user_can( 'edit_topic_tags' ) ) : ?>
 
 				<form id="merge_tag" name="merge_tag" method="post">
 
-					<div>
+					<div class="form-group" >
 						<label for="tag-existing-name"><?php esc_html_e( 'Existing tag:', 'bbpress' ); ?></label>
-						<input type="text" id="tag-existing-name" name="tag-existing-name" size="22" maxlength="40" />
+						<input class="form-control" type="text" id="tag-existing-name" name="tag-existing-name" size="22" maxlength="40" />
 					</div>
 
 					<div class="bbp-submit-wrapper">
-						<button type="submit" class="button submit" onclick="return confirm('<?php echo esc_js( sprintf( esc_html__( 'Are you sure you want to merge the "%s" tag into the tag you specified?', 'bbpress' ), bbp_get_topic_tag_name() ) ); ?>');"><?php esc_attr_e( 'Merge', 'bbpress' ); ?></button>
+						<button type="submit" class="button submit btn btn-primary" onclick="return confirm('<?php echo esc_js( sprintf( esc_html__( 'Are you sure you want to merge the "%s" tag into the tag you specified?', 'bbpress' ), bbp_get_topic_tag_name() ) ); ?>');"><?php esc_attr_e( 'Merge', 'bbpress' ); ?></button>
 
 						<input type="hidden" name="tag-id" value="<?php bbp_topic_tag_id(); ?>" />
 						<input type="hidden" name="action" value="bbp-merge-topic-tag" />
@@ -114,7 +114,7 @@ if ( current_user_can( 'edit_topic_tags' ) ) : ?>
 					<form id="delete_tag" name="delete_tag" method="post">
 
 						<div class="bbp-submit-wrapper">
-							<button type="submit" class="button submit" onclick="return confirm('<?php echo esc_js( sprintf( esc_html__( 'Are you sure you want to delete the "%s" tag? This is permanent and cannot be undone.', 'bbpress' ), bbp_get_topic_tag_name() ) ); ?>');"><?php esc_attr_e( 'Delete', 'bbpress' ); ?></button>
+							<button type="submit" class="button submit btn btn-primary" onclick="return confirm('<?php echo esc_js( sprintf( esc_html__( 'Are you sure you want to delete the "%s" tag? This is permanent and cannot be undone.', 'bbpress' ), bbp_get_topic_tag_name() ) ); ?>');"><?php esc_attr_e( 'Delete', 'bbpress' ); ?></button>
 
 							<input type="hidden" name="tag-id" value="<?php bbp_topic_tag_id(); ?>" />
 							<input type="hidden" name="action" value="bbp-delete-topic-tag" />

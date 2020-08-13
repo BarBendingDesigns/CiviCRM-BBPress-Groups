@@ -5,7 +5,7 @@
  * Plugin Name:       CiviCRM BBPress Groups
  * Plugin URI:        https://github.com/BarBendingDesigns/CiviCRM-BBPress-Groups
  * Description:       Synchronise selected CiviCRM group with WP users. Specify per-forum access permissions for BBPress. Shortcodes to output "My Account" and "My Profile" forms: My Profile form outputs different profile depending on current user's CiviCRM Contact ype. 
- * Version:           1.0.2
+ * Version:           1.0.3
  * Author:            Jasmin Higgs
  * Author URI:        https://barbendingdesigns.com
  * License:           GPL-2.0+
@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Current plugin version.
-define( 'CIVI_BB_GROUPS_VERSION', '1.0.2' );
+define( 'CIVI_BB_GROUPS_VERSION', '1.0.3' );
 
 // Define plugin path and URL
 if ( ! defined( 'CIVI_BB_GROUPS_PATH' ) ) {

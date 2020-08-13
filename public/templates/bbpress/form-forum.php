@@ -71,36 +71,27 @@ if ( bbp_is_forum_edit() ) : ?>
 
 					<?php do_action( 'bbp_theme_before_forum_form_title' ); ?>
 
-					<p>
+					<div class="form-group">
 						<label for="bbp_forum_title"><?php printf( esc_html__( 'Forum Name (Maximum Length: %d):', 'bbpress' ), bbp_get_title_max_length() ); ?></label><br />
-						<input type="text" id="bbp_forum_title" value="<?php bbp_form_forum_title(); ?>" size="40" name="bbp_forum_title" maxlength="<?php bbp_title_max_length(); ?>" />
-					</p>
+						<input class="form-control" type="text" id="bbp_forum_title" value="<?php bbp_form_forum_title(); ?>" size="40" name="bbp_forum_title" maxlength="<?php bbp_title_max_length(); ?>" />
+					</div>
 
 					<?php do_action( 'bbp_theme_after_forum_form_title' ); ?>
 
 					<?php do_action( 'bbp_theme_before_forum_form_content' ); ?>
 
-					<?php bbp_the_content( array( 'context' => 'forum' ) ); ?>
+					<?php bbp_the_content( array( 'context' => 'forum', 'editor_class' => 'form-control' ) ); ?>
 
 					<?php do_action( 'bbp_theme_after_forum_form_content' ); ?>
-
-					<?php if ( !bbp_use_wp_editor() && current_user_can( 'unfiltered_html' ) ) : ?>
-
-						<p class="form-allowed-tags">
-							<label><?php esc_html_e( 'You may use these HTML tags and attributes:','bbpress' ); ?></label><br />
-							<code><?php bbp_allowed_tags(); ?></code>
-						</p>
-
-					<?php endif; ?>
 
 					<?php if ( bbp_allow_forum_mods() && current_user_can( 'assign_moderators' ) ) : ?>
 
 						<?php do_action( 'bbp_theme_before_forum_form_mods' ); ?>
 
-						<p>
+						<div class="form-group">
 							<label for="bbp_moderators"><?php esc_html_e( 'Forum Moderators:', 'bbpress' ); ?></label><br />
-							<input type="text" value="<?php bbp_form_forum_moderators(); ?>" size="40" name="bbp_moderators" id="bbp_moderators" />
-						</p>
+							<input class="form-control" type="text" value="<?php bbp_form_forum_moderators(); ?>" size="40" name="bbp_moderators" id="bbp_moderators" />
+						</div>
 
 						<?php do_action( 'bbp_theme_after_forum_form_mods' ); ?>
 
@@ -110,7 +101,7 @@ if ( bbp_is_forum_edit() ) : ?>
 
 					<p>
 						<label for="bbp_forum_type"><?php esc_html_e( 'Forum Type:', 'bbpress' ); ?></label><br />
-						<?php bbp_form_forum_type_dropdown(); ?>
+						<?php bbp_form_forum_type_dropdown(['select_class' => 'form-control']); ?>
 					</p>
 
 					<?php do_action( 'bbp_theme_after_forum_form_type' ); ?>
@@ -119,7 +110,7 @@ if ( bbp_is_forum_edit() ) : ?>
 
 					<p>
 						<label for="bbp_forum_status"><?php esc_html_e( 'Status:', 'bbpress' ); ?></label><br />
-						<?php bbp_form_forum_status_dropdown(); ?>
+						<?php bbp_form_forum_status_dropdown(['select_class' => 'form-control']); ?>
 					</p>
 
 					<?php do_action( 'bbp_theme_after_forum_form_status' ); ?>
@@ -128,7 +119,7 @@ if ( bbp_is_forum_edit() ) : ?>
 
 					<p>
 						<label for="bbp_forum_visibility"><?php esc_html_e( 'Visibility:', 'bbpress' ); ?></label><br />
-						<?php bbp_form_forum_visibility_dropdown(); ?>
+						<?php bbp_form_forum_visibility_dropdown(['select_class' => 'form-control']); ?>
 					</p>
 
 					<?php do_action( 'bbp_theme_after_forum_visibility_status' ); ?>
@@ -143,7 +134,8 @@ if ( bbp_is_forum_edit() ) : ?>
 								'select_id' => 'bbp_forum_parent_id',
 								'show_none' => esc_html__( '&mdash; No parent &mdash;', 'bbpress' ),
 								'selected'  => bbp_get_form_forum_parent(),
-								'exclude'   => bbp_get_forum_id()
+								'exclude'   => bbp_get_forum_id(),
+								'select_class' => 'form-control'
 							) );
 						?>
 					</p>
@@ -156,7 +148,7 @@ if ( bbp_is_forum_edit() ) : ?>
 
 						<?php do_action( 'bbp_theme_before_forum_form_submit_button' ); ?>
 
-						<button type="submit" id="bbp_forum_submit" name="bbp_forum_submit" class="button submit"><?php esc_html_e( 'Submit', 'bbpress' ); ?></button>
+						<button type="submit" id="bbp_forum_submit" name="bbp_forum_submit" class="button submit btn btn-primary"><?php esc_html_e( 'Submit', 'bbpress' ); ?></button>
 
 						<?php do_action( 'bbp_theme_after_forum_form_submit_button' ); ?>
 

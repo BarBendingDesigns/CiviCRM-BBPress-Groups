@@ -11,3 +11,13 @@
     overflow: auto;
     width: 100%;
 }
+
+.civibbg-forum-links {
+    display: block;
+    clear: both;
+}
+
+.civibbg-forum-links span {
+    margin: 0 5px;
+}
+

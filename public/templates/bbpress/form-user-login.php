@@ -16,14 +16,14 @@ defined( 'ABSPATH' ) || exit;
 	<fieldset class="bbp-form">
 		<legend><?php esc_html_e( 'Log In', 'bbpress' ); ?></legend>
 
-		<div class="bbp-username">
+		<div class="bbp-username form-group">
 			<label for="user_login"><?php esc_html_e( 'Username', 'bbpress' ); ?>: </label>
-			<input type="text" name="log" value="<?php bbp_sanitize_val( 'user_login', 'text' ); ?>" size="20" maxlength="100" id="user_login" autocomplete="off" />
+			<input class="form-control" type="text" name="log" value="<?php bbp_sanitize_val( 'user_login', 'text' ); ?>" size="20" maxlength="100" id="user_login" autocomplete="off" />
 		</div>
 
-		<div class="bbp-password">
+		<div class="bbp-password form-group">
 			<label for="user_pass"><?php esc_html_e( 'Password', 'bbpress' ); ?>: </label>
-			<input type="password" name="pwd" value="<?php bbp_sanitize_val( 'user_pass', 'password' ); ?>" size="20" id="user_pass" autocomplete="off" />
+			<input class="form-control" type="password" name="pwd" value="<?php bbp_sanitize_val( 'user_pass', 'password' ); ?>" size="20" id="user_pass" autocomplete="off" />
 		</div>
 
 		<div class="bbp-remember-me">
@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || exit;
 
 		<div class="bbp-submit-wrapper">
 
-			<button type="submit" name="user-submit" id="user-submit" class="button submit user-submit"><?php esc_html_e( 'Log In', 'bbpress' ); ?></button>
+			<button type="submit" name="user-submit" id="user-submit" class="button submit user-submit btn btn-primary"><?php esc_html_e( 'Log In', 'bbpress' ); ?></button>
 
 			<?php bbp_user_login_fields(); ?>
 

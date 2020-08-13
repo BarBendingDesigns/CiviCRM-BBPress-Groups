@@ -370,6 +370,23 @@ class Civi_Bb_Groups_Admin {
 	            'sanitize_callback' => 'civibbg_sanitize_checkbox',
 	            'default' => false, 
 	        ),
+	        'civi-bb-groups-forum-instructions-page' => array(
+	        	'type' => 'dropdown',
+	            'name' => 'Forums "Instructions" Page',
+	            'description' => 'A page containing instructions for using the forums.',
+	            'section' => 'bbpress',
+	            'sanitize_callback' => 'absint',
+	            'default' => 0, 
+	        ),
+	        'civi-bb-groups-forum-tandcs-page' => array(
+	        	'type' => 'dropdown',
+	            'name' => 'Forums "Terms & Conditions" Page',
+	            'description' => 'A page containing terms & conditions for using the forums.',
+	            'section' => 'bbpress',
+	            'sanitize_callback' => 'absint',
+	            'default' => 0, 
+	        ),
+	        
 	    );
 	}
 	

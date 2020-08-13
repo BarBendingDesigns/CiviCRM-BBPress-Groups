@@ -213,5 +213,28 @@ class Civi_Bb_Groups_BBPress_Public {
 	    return $this->maybe_modify_forum_subscibers($user_ids, $topic_id, $forum_id);
 	}
 	
+    // Add "form-control" class to a bbp_dropdown
+    public function add_form_control_class($retval, $reply_id, $reply_to, $topic_id){
+        $retval = str_replace('class="bbp_dropdown"', 'class="form-control"', $retval);
+        return $retval;
+    }
+    
+    // Output forums "instructions" and "terms & conditions" links, if available
+    public function add_help_links(){
+        $instructions = absint(get_option('civi-bb-groups-forum-instructions-page', 0));
+        $terms = absint(get_option('civi-bb-groups-forum-tandcs-page', 0));
+        $links = [];
+        
+        foreach(['Forum instructions' => $instructions, 'Forum T&Cs' => $terms] as $k => $l){
+            if($l){
+                $link = get_permalink($l);
+                if($link) $links[] = "<a href='".esc_url($link)."'>$k</a>";   
+            }
+        }
+        
+        echo "<div class='civibbg-forum-links'>";
+        echo implode("<span>|</span>", $links);
+        echo "</div>";
+    }
 
 }

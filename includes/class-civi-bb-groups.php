@@ -127,8 +127,21 @@ class Civi_Bb_Groups {
         $this->loader->add_filter( 'bbp_get_topic_freshness_link', $bb_public, 'maybe_modify_topic_freshness_link', 10, 5);
         $this->loader->add_filter( 'bbp_forum_subscription_user_ids', $bb_public, 'maybe_modify_forum_subscibers', 10, 3);
         $this->loader->add_filter( 'bbp_topic_subscription_user_ids', $bb_public, 'maybe_modify_topic_subscribers', 10, 3);
+        $this->loader->add_filter( 'bbp_get_reply_to_dropdown', $bb_public, 'add_form_control_class', 10, 4);
         
-        
+        $this->loader->add_action( 'bbp_template_after_forums_index', $bb_public, 'add_help_links' );
+        $this->loader->add_action( 'bbp_template_after_topics_index', $bb_public, 'add_help_links' );
+        $this->loader->add_action( 'bbp_template_after_single_forum', $bb_public, 'add_help_links' );
+        $this->loader->add_action( 'bbp_template_after_single_topic', $bb_public, 'add_help_links' );
+        $this->loader->add_action( 'bbp_template_after_single_reply', $bb_public, 'add_help_links' );
+        $this->loader->add_action( 'bbp_template_after_search_results', $bb_public, 'add_help_links' );
+        $this->loader->add_action( 'bbp_template_after_user_profile', $bb_public, 'add_help_links' );
+        $this->loader->add_action( 'bbp_template_after_user_engagements', $bb_public, 'add_help_links' );
+        $this->loader->add_action( 'bbp_template_after_user_favorites', $bb_public, 'add_help_links' );
+        $this->loader->add_action( 'bbp_template_after_user_replies', $bb_public, 'add_help_links' );
+        $this->loader->add_action( 'bbp_template_after_user_subscriptions', $bb_public, 'add_help_links' );
+        $this->loader->add_action( 'bbp_template_after_user_topics_created', $bb_public, 'add_help_links' );
+
 	}
 
 	public function run() {

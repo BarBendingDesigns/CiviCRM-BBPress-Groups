@@ -31,12 +31,15 @@ If a forum is restricted, only users who have the specified role(s) can view or 
 
 ## Changelog
 
+### 1.0.3
+- Added "Instructions" and "T&Cs" page settings, with links to these from forums
+- More Bootstrap styling of forums forms
+
 ### 1.0.2
 - Removed login_form action from login form on forums 
 - Added some padding at bottom of My Account form
 - Don't display links in topic tag loop if current user isn't allow to acces the links
 - Updated front end user account update process to ensure that a valid nonce can still be set after a password change
-
 
 ### 1.0.1
 - Corrected a missing "php" 

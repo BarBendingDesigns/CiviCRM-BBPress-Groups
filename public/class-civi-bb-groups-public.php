@@ -385,11 +385,11 @@ class Civi_Bb_Groups_Public {
 	// My Account, My Profile and Logout links to the top of the page content
 	public function maybe_add_user_links($content){
 	    $account = absint(get_option('civi-bb-groups-account-page', 0));
-	    if(is_page($account)){
+	    if($account && is_page($account)){
 	        $content = $this->user_links($account) . $content;
 	    } else {
 	        $profile = absint(get_option('civi-bb-groups-profile-page', 0));
-	        if(is_page($profile)) $content = $this->user_links($profile) . $content;
+	        if($profile && is_page($profile)) $content = $this->user_links($profile) . $content;
 	    }
 	    
 	    return $content;

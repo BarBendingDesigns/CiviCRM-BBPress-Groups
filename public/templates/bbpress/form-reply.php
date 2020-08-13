@@ -69,26 +69,18 @@ if ( bbp_is_reply_edit() ) : ?>
 
 					<?php do_action( 'bbp_theme_before_reply_form_content' ); ?>
 
-					<?php bbp_the_content( array( 'context' => 'reply' ) ); ?>
+					<?php bbp_the_content( array( 'context' => 'reply', 'editor_class' => 'form-control' ) ); ?>
 
 					<?php do_action( 'bbp_theme_after_reply_form_content' ); ?>
-					
-					<?php if ( !bbp_use_wp_editor() && current_user_can( 'unfiltered_html' ) ) : ?>
-						<p class="form-allowed-tags">
-							<label><?php esc_html_e( 'You may use these HTML tags and attributes:','bbpress' ); ?></label><br />
-							<code><?php bbp_allowed_tags(); ?></code>
-						</p>
-
-					<?php endif; ?>
 
 					<?php if ( bbp_allow_topic_tags() && current_user_can( 'assign_topic_tags', bbp_get_topic_id() ) ) : ?>
 
 						<?php do_action( 'bbp_theme_before_reply_form_tags' ); ?>
 
-						<p>
+						<div class="form-group">
 							<label for="bbp_topic_tags"><?php esc_html_e( 'Tags:', 'bbpress' ); ?></label><br />
-							<input type="text" value="<?php bbp_form_topic_tags(); ?>" size="40" name="bbp_topic_tags" id="bbp_topic_tags" <?php disabled( bbp_is_topic_spam() ); ?> />
-						</p>
+							<input class="form-control" type="text" value="<?php bbp_form_topic_tags(); ?>" size="40" name="bbp_topic_tags" id="bbp_topic_tags" <?php disabled( bbp_is_topic_spam() ); ?> />
+						</div>
 
 						<?php do_action( 'bbp_theme_after_reply_form_tags' ); ?>
 
@@ -126,7 +118,7 @@ if ( bbp_is_reply_edit() ) : ?>
 
 							<p class="form-reply-to">
 								<label for="bbp_reply_to"><?php esc_html_e( 'Reply To:', 'bbpress' ); ?></label><br />
-								<?php bbp_reply_to_dropdown(); ?>
+								<?php bbp_reply_to_dropdown(['select_class' => 'form-control']); ?>
 							</p>
 
 							<?php do_action( 'bbp_theme_after_reply_form_reply_to' ); ?>
@@ -135,7 +127,7 @@ if ( bbp_is_reply_edit() ) : ?>
 
 							<p>
 								<label for="bbp_reply_status"><?php esc_html_e( 'Reply Status:', 'bbpress' ); ?></label><br />
-								<?php bbp_form_reply_status_dropdown(); ?>
+								<?php bbp_form_reply_status_dropdown(['select_class' => 'form-control']); ?>
 							</p>
 
 							<?php do_action( 'bbp_theme_after_reply_form_status' ); ?>
@@ -152,9 +144,9 @@ if ( bbp_is_reply_edit() ) : ?>
 									<label for="bbp_log_reply_edit"><?php esc_html_e( 'Keep a log of this edit:', 'bbpress' ); ?></label><br />
 								</legend>
 
-								<div>
+								<div class="form-group">
 									<label for="bbp_reply_edit_reason"><?php printf( esc_html__( 'Optional reason for editing:', 'bbpress' ), bbp_get_current_user_name() ); ?></label><br />
-									<input type="text" value="<?php bbp_form_reply_edit_reason(); ?>" size="40" name="bbp_reply_edit_reason" id="bbp_reply_edit_reason" />
+									<input class="form-control" type="text" value="<?php bbp_form_reply_edit_reason(); ?>" size="40" name="bbp_reply_edit_reason" id="bbp_reply_edit_reason" />
 								</div>
 							</fieldset>
 
@@ -172,7 +164,7 @@ if ( bbp_is_reply_edit() ) : ?>
 
 						<?php bbp_cancel_reply_to_link(); ?>
 
-						<button type="submit" id="bbp_reply_submit" name="bbp_reply_submit" class="button submit"><?php esc_html_e( 'Submit', 'bbpress' ); ?></button>
+						<button type="submit" id="bbp_reply_submit" name="bbp_reply_submit" class="button submit btn btn-primary"><?php esc_html_e( 'Submit', 'bbpress' ); ?></button>
 
 						<?php do_action( 'bbp_theme_after_reply_form_submit_button' ); ?>
 
